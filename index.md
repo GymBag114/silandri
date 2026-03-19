@@ -8,11 +8,11 @@ hero:
   tagline: 团结 平等 秩序
   actions:
     - theme: brand
-      text: Markdown Examples
+      text: 开始
       link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
+  image:
+      src: /public/image/SILANDRI/SILANDRI.png
+      alt: SILANDRI
 
 features:
   - title: 团结
