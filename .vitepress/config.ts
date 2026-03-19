@@ -3,7 +3,6 @@ import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
 
 export default defineConfig({
-  base,
   title: "SILANDRI",
   description: "席兰德里",
   lang: "zh-CN",
