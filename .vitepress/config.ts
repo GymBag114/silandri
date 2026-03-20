@@ -23,18 +23,22 @@ export default defineConfig({
       { text: "成员", link: "/members" }
     ],
 
-    sidebar: {
-      "/guide/": [
+    sidebar: [
         {
           text: "开始之前……",
           collapsed: false,
           items: [
             { text: "介绍", link: "/guide/intro" },
-            { text: "Markdown 解析测试", link: "/guide/markdown-test" }
+          ]
+        },
+        {
+          text: "施工测试",
+          collapsed: false,
+          items: [
+            { text: "Markdown 解析测试", link: "/testing/markdown-test" }
           ]
         }
-      ]
-    },
+      ],
     logo: '/image/SILANDRI/SILANDRI.png',
     docFooter: {
       prev: "上一页",
