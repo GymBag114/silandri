@@ -19,7 +19,7 @@ export default defineConfig({
     search: { provider: "local" },
     nav: [
       { text: '首页', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' },
+      { text: '介绍', link: '/guide/intro' },
       { text: "成员", link: "/members" }
     ],
 

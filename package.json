@@ -11,8 +11,7 @@
     "silandri:preview": "vitepress preview"
   },
   "devDependencies": {
-    "vitepress": "2.0.0-alpha.16",
-    "vue": "^3.5.27"
+    "vitepress": "^1.6.4"
   },
   "pnpm": {
     "peerDependencyRules": {
