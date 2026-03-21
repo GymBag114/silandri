@@ -22,7 +22,19 @@ export default defineConfig({
       { text: '介绍', link: '/guide/intro' },
       { text: "成员", link: "/members" }
     ],
-
+    lastUpdated: {
+      text: '最后更新',
+      formatOptions: {
+        dateStyle: 'medium',
+        timeStyle: 'medium'
+      }
+    },
+    darkModeSwitchLabel:"外观",
+    lightModeSwitchTitle:"切换至浅色模式",
+    darkModeSwitchTitle:"切换至深色模式",
+    sidebarMenuLabel: "菜单",
+    returnToTopLabel: "回到顶部",
+    externalLinkIcon: true,
     sidebar: [
         {
           text: "开始之前……",
