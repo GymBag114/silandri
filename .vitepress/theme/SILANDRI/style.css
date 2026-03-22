@@ -993,7 +993,8 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: min(100%, 860px);
+  width: fit-content;
+  max-width: min(100%, 1120px);
   gap: clamp(6px, 1vh, 12px);
 }
 
@@ -1014,6 +1015,7 @@ body {
   text-align: left;
   gap: clamp(8px, 1.2vh, 14px);
   flex: 0 1 auto;
+  width: fit-content;
   min-width: 0;
   max-width: min(56vw, 720px);
 }
@@ -1023,10 +1025,11 @@ body {
   display: grid;
   place-items: center;
   flex: 0 0 auto;
-  width: min(clamp(220px, 62vw, 460px), 42vh);
-  max-width: 460px;
+  width: min(clamp(200px, 54vw, 400px), 38vh);
+  max-width: 400px;
   aspect-ratio: 1;
   align-self: center;
+  overflow: visible;
 }
 
 .SilandriHome-emblem-glow {
@@ -1040,7 +1043,8 @@ body {
 .SilandriHome-emblem-image {
   position: relative;
   z-index: 1;
-  width: 88%;
+  display: block;
+  width: 100%;
   height: auto;
   filter: contrast(1.08) saturate(1.05);
 }
@@ -1108,8 +1112,8 @@ body {
   }
 
   .SilandriHome-emblem {
-    width: min(clamp(180px, 44vh, 320px), 40vw);
-    max-width: 360px;
+    width: min(clamp(160px, 40vh, 280px), 34vw);
+    max-width: 280px;
   }
 
   .SilandriHome-title {
