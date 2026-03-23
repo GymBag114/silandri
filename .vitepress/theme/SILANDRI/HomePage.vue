@@ -185,7 +185,7 @@ onBeforeUnmount(() => {
     <section class="SilandriHome-protocols sil-reveal">
       <div class="SilandriHome-protocols-head">
         <div>
-          <h2 class="SilandriHome-section-title sil-scramble">优势</h2>
+          <h2 class="SilandriHome-section-title sil-scramble">誓约</h2>
           <p class="SilandriHome-section-subtitle">Features</p>
         </div>
         <div class="SilandriHome-section-meta">
