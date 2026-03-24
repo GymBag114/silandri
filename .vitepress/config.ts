@@ -61,7 +61,7 @@ export default defineConfig({
       copyright: `Copyright © 2023-present SILANDRI`
     },
     editLink: {
-      pattern: `https://github.com/jiesendesi/jiesendesi.github.io/edit/main/:path`,
+      pattern: `https://github.com/GymBag114/silandri/edit/main/:path`,
       text: "在 GitHub 上编辑此页"
     }
 
