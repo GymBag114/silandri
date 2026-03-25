@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useData } from "vitepress";
 import { VPButton, VPFeatures, VPImage } from "vitepress/theme";
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 
 type HeroImage =
   | string
@@ -36,7 +36,7 @@ type HomeFrontmatter = {
   features?: HomeFeature[];
 };
 
-const rootRef = ref<HTMLElement | null>(null);
+const heroVisible = ref(false);
 const { frontmatter } = useData();
 const homeFrontmatter = computed(() => frontmatter.value as unknown as HomeFrontmatter);
 
@@ -64,46 +64,12 @@ const valueWords = computed(() => {
   return titles.length ? titles : ["团结", "平等", "秩序"];
 });
 
-let revealObserver: IntersectionObserver | null = null;
 let viewportResizeHandler: (() => void) | null = null;
 
 const setViewportHeightVar = () => {
   const vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty("--sil-vh", `${vh}px`);
 };
-
-const setupRevealObserver = async () => {
-  await nextTick();
-  revealObserver?.disconnect();
-  if (!rootRef.value) return;
-
-  const elements = rootRef.value.querySelectorAll<HTMLElement>(".sil-reveal");
-  if (typeof window.IntersectionObserver !== "function") {
-    elements.forEach((element) => element.classList.add("is-visible"));
-    return;
-  }
-
-  revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-visible");
-        revealObserver?.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-  );
-
-  elements.forEach((element) => revealObserver?.observe(element));
-};
-
-watch(isHome, (value) => {
-  if (value) {
-    void setupRevealObserver();
-  } else {
-    revealObserver?.disconnect();
-  }
-});
 
 onMounted(() => {
   setViewportHeightVar();
@@ -115,12 +81,13 @@ onMounted(() => {
   window.addEventListener("orientationchange", viewportResizeHandler);
 
   if (isHome.value) {
-    void setupRevealObserver();
+    void nextTick(() => {
+      heroVisible.value = true;
+    });
   }
 });
 
 onBeforeUnmount(() => {
-  revealObserver?.disconnect();
   if (viewportResizeHandler) {
     window.removeEventListener("resize", viewportResizeHandler);
     window.removeEventListener("orientationchange", viewportResizeHandler);
@@ -130,10 +97,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div v-if="isHome" ref="rootRef" class="SilandriHome">
+  <div v-if="isHome" class="SilandriHome">
     <section class="SilandriHome-hero">
       <div class="SilandriHome-scanline" />
-      <div class="SilandriHome-wordmark sil-reveal">
+      <div class="SilandriHome-wordmark sil-reveal" :class="{ 'is-visible': heroVisible }">
         <div class="SilandriHome-hero-body">
           <div class="SilandriHome-emblem">
             <div class="SilandriHome-emblem-glow" />
@@ -154,7 +121,7 @@ onBeforeUnmount(() => {
       </div>
     </section>
 
-    <section class="SilandriHome-values sil-reveal">
+    <section class="SilandriHome-values">
       <div class="SilandriHome-noise" />
       <div class="SilandriHome-values-inner">
         <div class="SilandriHome-kicker">// Core Values //</div>
@@ -182,7 +149,7 @@ onBeforeUnmount(() => {
       </div>
     </section>
 
-    <section class="SilandriHome-protocols sil-reveal">
+    <section class="SilandriHome-protocols">
       <div class="SilandriHome-protocols-head">
         <div>
           <h2 class="SilandriHome-section-title sil-scramble">誓约</h2>
@@ -198,14 +165,23 @@ onBeforeUnmount(() => {
       <VPFeatures v-if="features.length" class="SilandriHome-features" :features="features" />
     </section>
 
-    <section class="SilandriHome-cta sil-reveal">
+    <section class="SilandriHome-cta">
       <div class="SilandriHome-cta-target" />
       <div class="SilandriHome-cta-inner">
         <h3 class="SilandriHome-cta-title SilandriHome-cta-title-break">
           <span class="SilandriHome-cta-lead sil-scramble">ACCESS</span>
           <span class="SilandriHome-cta-tail sil-scramble">SILANDRI</span>
         </h3>
-        <p class="SilandriHome-cta-text">查看组织章程、成员结构与后续建设记录。</p>
+        <p class="SilandriHome-cta-text">查看组织章程、成员结构与后续建设记录</p>
+        <div class="SilandriHome-cta-actions">
+          <VPButton
+            class="SilandriHome-cta-button"
+            text="立刻加入"
+            href="/guide/intro#加入流程"
+            size="big"
+            theme="brand"
+          />
+        </div>
       </div>
     </section>
   </div>
