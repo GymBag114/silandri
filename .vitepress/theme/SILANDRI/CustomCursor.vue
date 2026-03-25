@@ -129,20 +129,16 @@ const stopAnimation = () => {
 };
 
 const animate = () => {
-  const ease = 0.2;
   const scaleEase = 0.22;
-  currentPos.x += (mousePos.x - currentPos.x) * ease;
-  currentPos.y += (mousePos.y - currentPos.y) * ease;
+  currentPos.x = mousePos.x;
+  currentPos.y = mousePos.y;
   scaleState.current += (scaleState.target - scaleState.current) * scaleEase;
 
   updateCursorTransform();
 
-  const isPositionSettled =
-    Math.abs(mousePos.x - currentPos.x) < 0.1 &&
-    Math.abs(mousePos.y - currentPos.y) < 0.1;
   const isScaleSettled = Math.abs(scaleState.target - scaleState.current) < 0.01;
 
-  if (isPositionSettled && isScaleSettled) {
+  if (isScaleSettled) {
     currentPos.x = mousePos.x;
     currentPos.y = mousePos.y;
     scaleState.current = scaleState.target;
