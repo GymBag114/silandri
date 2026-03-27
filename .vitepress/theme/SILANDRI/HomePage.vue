@@ -72,13 +72,14 @@ const setViewportHeightVar = () => {
 };
 
 onMounted(() => {
-  setViewportHeightVar();
-  viewportResizeHandler = () => {
+  if (!window.CSS?.supports("height", "100dvh")) {
     setViewportHeightVar();
-    window.setTimeout(setViewportHeightVar, 80);
-  };
-  window.addEventListener("resize", viewportResizeHandler, { passive: true });
-  window.addEventListener("orientationchange", viewportResizeHandler);
+    viewportResizeHandler = () => {
+      setViewportHeightVar();
+    };
+    window.addEventListener("resize", viewportResizeHandler, { passive: true });
+    window.addEventListener("orientationchange", viewportResizeHandler);
+  }
 
   if (isHome.value) {
     void nextTick(() => {

@@ -3,7 +3,6 @@ import { defineComponent, nextTick, onBeforeUnmount, onMounted, watch } from "vu
 
 const SCRAMBLE_CHARS = "{}?+{^*<>[]!~";
 const TARGETS = [
-  ".VPHomeHero .name",
   ".VPTeamPageTitle .title",
   ".SilandriHome .sil-scramble"
 ] as const;

@@ -87,20 +87,6 @@ html {
   scrollbar-gutter: stable;
 }
 
-html.sil-cursor-active,
-html.sil-cursor-active body,
-html.sil-cursor-active a,
-html.sil-cursor-active button,
-html.sil-cursor-active input,
-html.sil-cursor-active textarea,
-html.sil-cursor-active select,
-html.sil-cursor-active summary,
-html.sil-cursor-active [role="button"],
-html.sil-cursor-active .VPLink,
-html.sil-cursor-active .VPButton {
-  cursor: none !important;
-}
-
 /* --- 基础背景 --- */
 body {
   background-color: var(--vp-c-bg);
@@ -976,13 +962,7 @@ body {
 }
 
 .SilandriHome-scanline {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent, rgba(255, 95, 0, 0.04), transparent);
-  background-size: 100% 8px;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  opacity: 0.45;
+  display: none;
 }
 
 .SilandriHome-wordmark {
@@ -1037,7 +1017,7 @@ body {
   inset: 18%;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(255, 95, 0, 0.2), transparent 72%);
-  filter: blur(24px);
+  opacity: 0.55;
 }
 
 .SilandriHome-emblem-image {
@@ -1046,7 +1026,6 @@ body {
   display: block;
   width: 100%;
   height: auto;
-  filter: contrast(1.08) saturate(1.05);
 }
 
 .SilandriHome-title {

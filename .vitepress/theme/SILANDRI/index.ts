@@ -2,7 +2,6 @@ import DefaultTheme from "vitepress/theme";
 import { h } from "vue";
 import HomePage from "./HomePage.vue";
 import ScrambleHeroTitle from "./ScrambleHeroTitle";
-import CustomCursor from "./CustomCursor.vue";
 import "./style.css";
 
 export default {
@@ -16,8 +15,7 @@ export default {
           "home-hero-before": () => h(HomePage)
         }
       ),
-      h(ScrambleHeroTitle),
-      h(CustomCursor)
+      h(ScrambleHeroTitle)
     ]);
   }
 };
