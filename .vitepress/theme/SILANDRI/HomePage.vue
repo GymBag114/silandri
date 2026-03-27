@@ -100,7 +100,6 @@ onBeforeUnmount(() => {
 <template>
   <div v-if="isHome" class="SilandriHome">
     <section class="SilandriHome-hero">
-      <div class="SilandriHome-scanline" />
       <div class="SilandriHome-wordmark sil-reveal" :class="{ 'is-visible': heroVisible }">
         <div class="SilandriHome-hero-body">
           <div class="SilandriHome-emblem">

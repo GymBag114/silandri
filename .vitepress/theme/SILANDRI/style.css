@@ -146,64 +146,6 @@ body {
   }
 }
 
-/* --- Hero --- */
-.VPHomeHero {
-  padding-top: 120px;
-  position: relative;
-}
-
-@media (min-width: 960px) {
-  .VPHomeHero .image-container {
-    transform: none;
-  }
-}
-
-.VPHomeHero .name {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 900;
-  font-size: clamp(44px, 7vw, 88px);
-  line-height: 1;
-  color: var(--endfield-orange);
-  letter-spacing: -0.05em;
-}
-
-.VPHomeHero .text {
-  font-family: var(--vp-font-family-mono);
-  text-transform: none;
-  letter-spacing: 0.12em;
-  font-weight: 800;
-  font-size: 14px;
-  opacity: 0.5;
-  margin-top: 15px;
-}
-
-.VPHomeHero .tagline {
-  font-size: 20px;
-  max-width: 550px;
-  border-left: 4px solid var(--endfield-orange);
-  padding: 10px 0 10px 25px;
-  margin-top: 32px;
-  font-weight: 500;
-  background: linear-gradient(90deg, rgba(255,95,0,0.05), transparent);
-  color: var(--vp-c-text-2);
-}
-
-@media (max-width: 639px) {
-  .VPHomeHero .text {
-    letter-spacing: 0.02em;
-  }
-
-  .VPHomeHero .tagline {
-    border-left: 0;
-    padding: 16px 0 0;
-    margin-top: 18px;
-    background: linear-gradient(180deg, rgba(255, 95, 0, 0.05), transparent);
-    text-align: center;
-    border-top: 2px solid var(--endfield-orange);
-  }
-}
-
 /* --- 侧边栏 --- */
 .VPSidebar {
   background-color: var(--vp-sidebar-bg-color);
@@ -925,7 +867,6 @@ body {
 .SilandriHome-hero {
   min-height: calc(100vh - var(--vp-nav-height));
   min-height: calc(100svh - var(--vp-nav-height));
-  min-height: calc(var(--sil-vh, 1vh) * 100 - var(--vp-nav-height));
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -947,7 +888,6 @@ body {
   .SilandriHome-hero {
     min-height: 100vh;
     min-height: 100svh;
-    min-height: calc(var(--sil-vh, 1vh) * 100);
   }
 
   .SilandriHome-hero {
@@ -959,10 +899,6 @@ body {
   background:
     linear-gradient(180deg, rgba(13, 13, 13, 0.45), rgba(13, 13, 13, 0.92)),
     radial-gradient(circle at 50% 45%, rgba(255, 95, 0, 0.16), transparent 28%);
-}
-
-.SilandriHome-scanline {
-  display: none;
 }
 
 .SilandriHome-wordmark {
@@ -1394,12 +1330,22 @@ body {
 @supports (min-height: 100dvh) {
   .SilandriHome-hero {
     min-height: calc(100dvh - var(--vp-nav-height));
-    min-height: calc(var(--sil-vh, 1vh) * 100 - var(--vp-nav-height));
   }
 
   @media (min-width: 960px) {
     .SilandriHome-hero {
       min-height: 100dvh;
+    }
+  }
+}
+
+@supports not (min-height: 100dvh) {
+  .SilandriHome-hero {
+    min-height: calc(var(--sil-vh, 1vh) * 100 - var(--vp-nav-height));
+  }
+
+  @media (min-width: 960px) {
+    .SilandriHome-hero {
       min-height: calc(var(--sil-vh, 1vh) * 100);
     }
   }
