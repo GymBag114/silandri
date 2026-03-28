@@ -9,6 +9,9 @@ export default defineConfig({
   head: [['link', { rel: 'icon', type: 'image/webp', href: `/image/SILANDRI/logo-mark.webp` }]],
   cleanUrls: true,
   lastUpdated: true,
+  sitemap: {
+    hostname: 'https://silandri.top/'
+  },
   markdown: {
     lineNumbers: true
   },
