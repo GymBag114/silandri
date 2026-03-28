@@ -4,10 +4,12 @@
   "type": "module",
   "scripts": {
     "dev": "vitepress dev",
-    "build": "vitepress build",
+    "build": "vitepress build && node scripts/indexnow.mjs",
+    "build:site": "vitepress build",
     "serve": "vitepress serve",
     "silandri:dev": "vitepress dev",
-    "silandri:build": "vitepress build",
+    "silandri:build": "vitepress build && node scripts/indexnow.mjs",
+    "silandri:build:site": "vitepress build",
     "silandri:preview": "vitepress preview"
   },
   "devDependencies": {
