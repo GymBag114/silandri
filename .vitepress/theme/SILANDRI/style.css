@@ -718,6 +718,12 @@ body {
   color: var(--vp-c-text-2);
 }
 
+/* Keep restored link focus from inheriting VitePress's white sponsor text. */
+.VPTeamMembersItem:not(:hover) .sp .sp-link.link:focus,
+.VPTeamMembersItem:not(:hover) .sp .sp-link.link:focus-visible {
+  color: var(--vp-c-text-2) !important;
+}
+
 .VPTeamMembersItem:hover .sp-link {
   background-color: #000 !important;
   border-top-color: var(--endfield-orange) !important;
