@@ -3,7 +3,7 @@
 layout: home
 pageClass: silandri-home
 
-hero:
+silHero:
   name: "SILANDRI"
   text: "席兰德里"
   tagline: 跨平台的建设与竞技社群
@@ -15,10 +15,10 @@ hero:
       text: 查看成员
       link: /members
   image:
-      src: /image/SILANDRI/SILANDRI.png
+      src: /image/SILANDRI/logo-hero.webp
       alt: SILANDRI
 
-features:
+silFeatures:
   - title: 团结
     details: 组织的整体利益高于个人利益
   - title: 平等

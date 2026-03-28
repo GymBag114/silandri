@@ -1,4 +1,196 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Noto+Sans+SC:wght@100;300;400;700;900&display=swap');
+@font-face {
+  font-family: "Silandri Sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src:
+    local("PingFang SC"),
+    local("Hiragino Sans GB"),
+    local("Microsoft YaHei"),
+    url("../../../node_modules/@fontsource/noto-sans-sc/files/noto-sans-sc-latin-400-normal.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF,
+    U+0100-024F,
+    U+1E00-1EFF,
+    U+2000-206F,
+    U+20A0-20CF,
+    U+2122,
+    U+2191,
+    U+2193,
+    U+2212,
+    U+2215,
+    U+FEFF,
+    U+FFFD;
+}
+
+@font-face {
+  font-family: "Silandri Sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src:
+    local("PingFang SC"),
+    local("Hiragino Sans GB"),
+    local("Microsoft YaHei"),
+    url("../../../node_modules/@fontsource/noto-sans-sc/files/noto-sans-sc-chinese-simplified-400-normal.woff2") format("woff2");
+  unicode-range:
+    U+2E80-2EFF,
+    U+2F00-2FDF,
+    U+2FF0-2FFF,
+    U+3000-303F,
+    U+31C0-31EF,
+    U+3400-4DBF,
+    U+4E00-9FFF,
+    U+F900-FAFF,
+    U+FF00-FFEF;
+}
+
+@font-face {
+  font-family: "Silandri Sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src:
+    local("PingFang SC Medium"),
+    local("PingFang SC"),
+    local("Hiragino Sans GB"),
+    local("Microsoft YaHei"),
+    url("../../../node_modules/@fontsource/noto-sans-sc/files/noto-sans-sc-latin-500-normal.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF,
+    U+0100-024F,
+    U+1E00-1EFF,
+    U+2000-206F,
+    U+20A0-20CF,
+    U+2122,
+    U+2191,
+    U+2193,
+    U+2212,
+    U+2215,
+    U+FEFF,
+    U+FFFD;
+}
+
+@font-face {
+  font-family: "Silandri Sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src:
+    local("PingFang SC Medium"),
+    local("PingFang SC"),
+    local("Hiragino Sans GB"),
+    local("Microsoft YaHei"),
+    url("../../../node_modules/@fontsource/noto-sans-sc/files/noto-sans-sc-chinese-simplified-500-normal.woff2") format("woff2");
+  unicode-range:
+    U+2E80-2EFF,
+    U+2F00-2FDF,
+    U+2FF0-2FFF,
+    U+3000-303F,
+    U+31C0-31EF,
+    U+3400-4DBF,
+    U+4E00-9FFF,
+    U+F900-FAFF,
+    U+FF00-FFEF;
+}
+
+@font-face {
+  font-family: "Silandri Sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src:
+    local("PingFang SC Semibold"),
+    local("PingFang SC"),
+    local("Hiragino Sans GB"),
+    local("Microsoft YaHei Bold"),
+    url("../../../node_modules/@fontsource/noto-sans-sc/files/noto-sans-sc-latin-700-normal.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF,
+    U+0100-024F,
+    U+1E00-1EFF,
+    U+2000-206F,
+    U+20A0-20CF,
+    U+2122,
+    U+2191,
+    U+2193,
+    U+2212,
+    U+2215,
+    U+FEFF,
+    U+FFFD;
+}
+
+@font-face {
+  font-family: "Silandri Sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src:
+    local("PingFang SC Semibold"),
+    local("PingFang SC"),
+    local("Hiragino Sans GB"),
+    local("Microsoft YaHei Bold"),
+    url("../../../node_modules/@fontsource/noto-sans-sc/files/noto-sans-sc-chinese-simplified-700-normal.woff2") format("woff2");
+  unicode-range:
+    U+2E80-2EFF,
+    U+2F00-2FDF,
+    U+2FF0-2FFF,
+    U+3000-303F,
+    U+31C0-31EF,
+    U+3400-4DBF,
+    U+4E00-9FFF,
+    U+F900-FAFF,
+    U+FF00-FFEF;
+}
+
+@font-face {
+  font-family: "Silandri Mono";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src:
+    local("JetBrains Mono"),
+    local("SF Mono"),
+    local("Menlo"),
+    url("../../../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Silandri Mono";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src:
+    local("JetBrains Mono Bold"),
+    local("JetBrains Mono"),
+    local("SF Mono Bold"),
+    local("Menlo Bold"),
+    url("../../../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Silandri Mono";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 800;
+  src:
+    local("JetBrains Mono ExtraBold"),
+    local("JetBrains Mono Bold"),
+    local("JetBrains Mono"),
+    url("../../../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-800-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Silandri Serif";
+  font-style: italic;
+  font-display: swap;
+  font-weight: 900;
+  src:
+    local("Playfair Display Black Italic"),
+    local("Playfair Display Black"),
+    local("Playfair Display"),
+    url("../../../node_modules/@fontsource/playfair-display/files/playfair-display-latin-900-italic.woff2") format("woff2");
+}
 
 :root {
   --endfield-orange: #FF5F00;
@@ -6,9 +198,9 @@
   --vp-c-brand-2: #121212;
   
   /* 字体 */
-  --vp-font-family-base: 'Noto Sans SC', sans-serif;
-  --vp-font-family-mono: 'JetBrains Mono', monospace;
-  --serif: 'Playfair Display', serif;
+  --vp-font-family-base: "Silandri Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+  --vp-font-family-mono: "Silandri Mono", "JetBrains Mono", "SFMono-Regular", "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --serif: "Silandri Serif", "Playfair Display", "Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, "Times New Roman", serif;
 
   --vp-button-brand-bg: var(--endfield-orange);
   --vp-button-brand-text: #fff;
@@ -91,22 +283,15 @@ html {
 body {
   background-color: var(--vp-c-bg);
   color: var(--vp-c-text-1);
-  background-image: 
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E"),
+  background-image:
       radial-gradient(var(--grid-dot) 1px, transparent 1px),
       linear-gradient(to right, var(--grid-line-bold) 1px, transparent 1px),
       linear-gradient(to bottom, var(--grid-line-bold) 1px, transparent 1px),
       linear-gradient(to right, var(--grid-line-fine) 1px, transparent 1px),
       linear-gradient(to bottom, var(--grid-line-fine) 1px, transparent 1px);
-  background-size: 256px 256px, 20px 20px, 80px 80px, 80px 80px, 20px 20px, 20px 20px;
+  background-size: 20px 20px, 80px 80px, 80px 80px, 20px 20px, 20px 20px;
   background-position: center center;
   background-attachment: fixed;
-}
-
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
 }
 
 /* --- 标题栏 --- */
@@ -822,12 +1007,6 @@ body {
 }
 .VPFeature:hover::after { opacity: 1; }
 
-/* --- 自定义首页 --- */
-.silandri-home .VPHomeHero,
-.silandri-home .VPHomeFeatures {
-  display: none;
-}
-
 .silandri-home .VPHome {
   margin: 0;
 }
@@ -1079,16 +1258,6 @@ body {
   padding: 120px 24px;
   background: #080808;
   color: #fff;
-}
-
-.SilandriHome-noise {
-  position: absolute;
-  inset: 0;
-  opacity: 0.12;
-  background-image:
-    radial-gradient(circle at 20% 20%, rgba(255, 95, 0, 0.24), transparent 14%),
-    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.08), transparent 18%);
-  pointer-events: none;
 }
 
 .SilandriHome-values-inner {

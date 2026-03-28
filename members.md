@@ -12,7 +12,7 @@ import {
 
 const coreMembers = [
   {
-    avatar: '/image/members/jiesendesi.jpg',
+    avatar: '/image/members/jiesendesi.webp',
     name: '杰森德斯',
     title: '创始人',
     links: [
@@ -20,7 +20,7 @@ const coreMembers = [
     ]
   },
   {
-    avatar: '/image/members/gymbag.jpg',
+    avatar: '/image/members/gymbag.webp',
     name: 'GymBag',
     title: '走后门进来的',
   }
@@ -28,7 +28,7 @@ const coreMembers = [
 
 const partners = [
   {
-    avatar: '/image/members/CSTF.jpg',
+    avatar: '/image/members/CSTF.webp',
     name: 'C.S.T.F.',
     title: '技术支援',
   },

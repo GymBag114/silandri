@@ -6,7 +6,7 @@ export default defineConfig({
   title: "SILANDRI",
   description: "席兰德里",
   lang: "zh-CN",
-  head: [['link', { rel: 'icon', type: 'image/png', href: `/image/SILANDRI/SILANDRI.png` }]],
+  head: [['link', { rel: 'icon', type: 'image/webp', href: `/image/SILANDRI/logo-mark.webp` }]],
   cleanUrls: true,
   lastUpdated: true,
   markdown: {
@@ -51,7 +51,7 @@ export default defineConfig({
           ]
         }
       ],
-    logo: '/image/SILANDRI/SILANDRI.png',
+    logo: '/image/SILANDRI/logo-mark.webp',
     docFooter: {
       prev: "上一页",
       next: "下一页"

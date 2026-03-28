@@ -32,8 +32,8 @@ type HomeHero = {
 
 type HomeFrontmatter = {
   layout?: string;
-  hero?: HomeHero;
-  features?: HomeFeature[];
+  silHero?: HomeHero;
+  silFeatures?: HomeFeature[];
 };
 
 const heroVisible = ref(false);
@@ -41,8 +41,8 @@ const { frontmatter } = useData();
 const homeFrontmatter = computed(() => frontmatter.value as unknown as HomeFrontmatter);
 
 const isHome = computed(() => homeFrontmatter.value.layout === "home");
-const hero = computed<HomeHero>(() => homeFrontmatter.value.hero ?? {});
-const features = computed<HomeFeature[]>(() => homeFrontmatter.value.features ?? []);
+const hero = computed<HomeHero>(() => homeFrontmatter.value.silHero ?? {});
+const features = computed<HomeFeature[]>(() => homeFrontmatter.value.silFeatures ?? []);
 const actions = computed<HeroAction[]>(() => hero.value.actions ?? []);
 const heroTagline = computed(() => String(hero.value.tagline ?? ""));
 const heroTaglineLead = computed(() => heroTagline.value.slice(0, 4));
@@ -52,7 +52,7 @@ const heroImage = computed(() => {
   const image = hero.value.image;
   if (image && typeof image === "object" && "src" in image) return image;
   if (typeof image === "string") return { src: image, alt: hero.value.name ?? "SILANDRI" };
-  return { src: "/image/SILANDRI/SILANDRI.png", alt: hero.value.name ?? "SILANDRI" };
+  return { src: "/image/SILANDRI/logo-hero.webp", alt: hero.value.name ?? "SILANDRI" };
 });
 
 const valueWords = computed(() => {
@@ -122,7 +122,6 @@ onBeforeUnmount(() => {
     </section>
 
     <section class="SilandriHome-values">
-      <div class="SilandriHome-noise" />
       <div class="SilandriHome-values-inner">
         <div class="SilandriHome-kicker">// Core Values //</div>
         <div class="SilandriHome-values-title">
