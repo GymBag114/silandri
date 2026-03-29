@@ -1,6 +1,6 @@
 ---
 title: Markdown 解析测试页
-description: 用于检验 VitePress 的 Markdown 渲染、代码高亮、容器、表格、Mermaid 等能力
+description: 用于测试 SILANDRI 站点中 VitePress 的 Markdown 渲染、代码高亮、容器、表格与 Mermaid 支持情况
 ---
 
 # Markdown 解析测试页

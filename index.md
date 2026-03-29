@@ -2,7 +2,7 @@
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
 title: 席兰德里
-description: 这里是跨平台竞技与建设社群「SILANDRI（席兰德里）」的主页，提供组织介绍、成员信息与准入入口
+description: 这里是跨平台竞技与建设社群「SILANDRI（席兰德里）」的主页，SILANDRI（席兰德里）是一个以高素质玩家为核心的跨平台游戏团体。组织起源于 Minecraft 生态下的深度协作，目前重心已迁移至 EVE Online。本站提供SILANDRI（席兰德里）的组织介绍、成员信息与准入入口。
 pageClass: silandri-home
 
 silHero:

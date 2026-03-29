@@ -1,7 +1,7 @@
 ---
 layout: page
 title: 成员
-description: SILANDRI（席兰德里）的核心成员与合作伙伴名录
+description: 通过本网页浏览 SILANDRI（席兰德里）的核心成员、合作伙伴与当前公开成员结构。
 sidebar: false
 ---
 <script setup lang="ts">
