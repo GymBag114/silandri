@@ -76,7 +76,10 @@ export default defineConfig({
           ]
         }
       ],
-    logo: '/image/SILANDRI/logo-mark.webp',
+    logo: {
+      src: '/image/SILANDRI/logo-mark.webp',
+      alt: 'SILANDRI 标志'
+    },
     docFooter: {
       prev: "上一页",
       next: "下一页"
