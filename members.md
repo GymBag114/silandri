@@ -17,6 +17,9 @@ const coreMembers = [
     title: '创始人',
     links: [
       { icon: 'googlehome', link: 'https://jiesendesi.github.io/my-react-app/' }
+        ] // <-
+        }, // <-
+  {  // <-
     avatar: '/image/members/gymbag.webp',
     name: 'GymBag',
     title: '走后门进来的',
