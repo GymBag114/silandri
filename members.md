@@ -23,8 +23,6 @@ const coreMembers = [
     avatar: '/image/members/gymbag.webp',
     name: 'GymBag',
     title: '走后门进来的',
-    sponsor: 'https://ifdian.net/a/xuanxuan1221/plan',
-    actionText: '我很可爱，请给我钱',
   }
 ]
 
