@@ -7,7 +7,7 @@ const publicDir = path.resolve('public')
 const sitemapPath = path.join(distDir, 'sitemap.xml')
 
 const host = (process.env.INDEXNOW_HOST || 'silandri.top').trim()
-const endpoint = (process.env.INDEXNOW_ENDPOINT || 'https://api.indexnow.org/indexnow').trim()
+const endpoint = (process.env.INDEXNOW_ENDPOINT || 'https://www.bing.com/indexnow').trim()
 
 async function readSitemapUrls(filePath) {
   const xml = await readFile(filePath, 'utf8')
