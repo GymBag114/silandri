@@ -55,7 +55,7 @@ async function submitIndexNow(urlList, indexNowKey) {
     throw new Error(`IndexNow 提交失败：${response.status} ${response.statusText}\n${body}`)
   }
 
-  console.log(`IndexNow 已向 ${endpoint} 提交 ${urlList.length} 个 URL。`)
+  console.log(`IndexNow 已向 ${endpoint} 提交 ${urlList.length} 个 URL。密钥为 ${indexNowKey}，密钥文件位置：${keyLocation}，提交列表：\n${urlList.join('\n')}`)
 }
 
 async function main() {
