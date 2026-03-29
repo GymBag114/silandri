@@ -17,11 +17,6 @@ const coreMembers = [
     title: '创始人',
     links: [
       { icon: 'googlehome', link: 'https://jiesendesi.github.io/my-react-app/' }
-    ],
-    sponsor: 'https://ifdian.net/a/Suzuha0326_/plan',
-    actionText: '加入功劳簿',
-  },
-  {
     avatar: '/image/members/gymbag.webp',
     name: 'GymBag',
     title: '走后门进来的',
