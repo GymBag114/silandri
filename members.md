@@ -1,5 +1,7 @@
 ---
 layout: page
+title: 成员
+description: SILANDRI（席兰德里）的核心成员与合作伙伴名录
 sidebar: false
 ---
 <script setup lang="ts">
@@ -17,9 +19,9 @@ const coreMembers = [
     title: '创始人',
     links: [
       { icon: 'googlehome', link: 'https://jiesendesi.github.io/my-react-app/' }
-        ] // <-
-        }, // <-
-  {  // <-
+    ]
+  },
+  {
     avatar: '/image/members/gymbag.webp',
     name: 'GymBag',
     title: '走后门进来的',

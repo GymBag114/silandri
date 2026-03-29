@@ -1,6 +1,8 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
+title: 席兰德里
+description: 这里是跨平台竞技与建设社群「SILANDRI（席兰德里）」的主页，提供组织介绍、成员信息与准入入口
 pageClass: silandri-home
 
 silHero:
