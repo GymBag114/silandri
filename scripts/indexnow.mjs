@@ -37,25 +37,25 @@ async function resolveKey() {
 
 async function submitIndexNow(urlList, indexNowKey) {
   const keyLocation = `https://${host}/${indexNowKey}.txt`
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json; charset=utf-8'
-    },
-    body: JSON.stringify({
-      host,
-      key: indexNowKey,
-      keyLocation,
-      urlList
-    })
-  })
+  let submitted = 0
 
-  if (!response.ok) {
-    const body = await response.text()
-    throw new Error(`IndexNow 提交失败：${response.status} ${response.statusText}\n${body}`)
+  for (const url of urlList) {
+    const requestUrl = new URL(endpoint)
+    requestUrl.searchParams.set('url', url)
+    requestUrl.searchParams.set('key', indexNowKey)
+    requestUrl.searchParams.set('keyLocation', keyLocation)
+
+    const response = await fetch(requestUrl, { method: 'GET' })
+
+    if (!response.ok) {
+      const body = await response.text()
+      throw new Error(`Bing IndexNow 提交失败：${response.status} ${response.statusText}\nURL: ${url}\n${body}`)
+    }
+
+    submitted += 1
   }
 
-  console.log(`IndexNow 已向 ${endpoint} 提交 ${urlList.length} 个 URL。密钥为 ${indexNowKey}，密钥文件位置：${keyLocation}，提交列表：\n${urlList.join('\n')}`)
+  console.log(`Bing IndexNow 已逐条提交 ${submitted} 个 URL。密钥文件位置：${keyLocation}`)
 }
 
 async function main() {
