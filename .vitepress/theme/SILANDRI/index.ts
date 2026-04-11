@@ -1,6 +1,8 @@
 import DefaultTheme from "vitepress/theme";
 import { Analytics } from "@vercel/analytics/vue";
 import { SpeedInsights } from "@vercel/speed-insights/vue";
+import ImageViewerPlugin from "@miletorix/vitepress-image-viewer";
+import "@miletorix/vitepress-image-viewer/style.css";
 import { h } from "vue";
 import HomePage from "./HomePage.vue";
 import ScrambleHeroTitle from "./ScrambleHeroTitle";
@@ -8,6 +10,9 @@ import "./style.css";
 
 export default {
   extends: DefaultTheme,
+  enhanceApp({ app }) {
+    ImageViewerPlugin(app);
+  },
   Layout() {
     return h("div", [
       h(
