@@ -1755,3 +1755,12 @@ body {
     --sil-viewer-toolbar-icon-size: 18px;
   }
 }
+
+/* --- Disable image viewer for specific non-article areas --- */
+.SilandriHome img,
+.VPTeamPage img,
+.VPNavBar img,
+.VPSidebar img {
+  pointer-events: none !important;
+  cursor: default !important;
+}
