@@ -69,8 +69,18 @@ export default defineConfig({
           ]
         },
         {
-          text: "施工测试",
+          text: "EVE指南",
           collapsed: false,
+          items: [
+            { text: "挖坟：开始之前", link: "/eve_guide/getting-started" },
+            { text: "挖坟：入门正文", link: "/eve_guide/basics" },
+            { text: "挖坟：进阶实践", link: "/eve_guide/advanced-practice" },
+            { text: "挖坟：补充内容", link: "/eve_guide/supplemental-content" }
+          ]
+        },
+        {
+          text: "施工测试",
+          collapsed: true,
           items: [
             { text: "Markdown 解析测试", link: "/testing/markdown-test" }
           ]
