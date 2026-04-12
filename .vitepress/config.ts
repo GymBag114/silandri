@@ -77,13 +77,6 @@ export default defineConfig({
             { text: "挖坟：进阶实践", link: "/eve_guide/advanced-practice" },
             { text: "挖坟：补充内容", link: "/eve_guide/supplemental-content" }
           ]
-        },
-        {
-          text: "施工测试",
-          collapsed: true,
-          items: [
-            { text: "Markdown 解析测试", link: "/testing/markdown-test" }
-          ]
         }
       ],
     logo: {
