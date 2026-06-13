@@ -1019,16 +1019,22 @@ body {
 
 .Layout.silandri-home .VPContent.is-home {
   margin-top: 0;
-}
-
-@media (min-width: 960px) {
-  .Layout.silandri-home .VPContent.is-home {
-    padding-top: 0;
-  }
+  /* Pull the hero under the (transparent) nav on every width so the mobile
+     top bar is immersive, matching desktop. */
+  padding-top: 0;
 }
 
 .SilandriHome {
   position: relative;
+  /* Ink for the fixed anchor overlay; flips to light while a dark panel is active. */
+  --sil-overlay-c: var(--vp-c-text-2);
+  --sil-overlay-strong: var(--vp-c-text-1);
+  --sil-hazard: repeating-linear-gradient(-45deg, var(--endfield-orange) 0 11px, #141414 11px 22px);
+}
+
+.SilandriHome.is-on-dark {
+  --sil-overlay-c: rgba(255, 255, 255, 0.64);
+  --sil-overlay-strong: #fff;
 }
 
 .SilandriHome section {
@@ -1050,8 +1056,8 @@ body {
 }
 
 .SilandriHome-hero {
-  min-height: calc(100vh - var(--vp-nav-height));
-  min-height: calc(100svh - var(--vp-nav-height));
+  min-height: 100vh;
+  min-height: 100svh;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -1137,8 +1143,8 @@ body {
   position: absolute;
   inset: 18%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 95, 0, 0.2), transparent 72%);
-  opacity: 0.55;
+  background: radial-gradient(circle, rgba(255, 95, 0, 0.28), transparent 72%);
+  opacity: 0.72;
 }
 
 .SilandriHome-emblem-image {
@@ -1316,10 +1322,11 @@ body {
 }
 
 .SilandriHome-divider {
-  width: 140px;
-  height: 2px;
+  width: 168px;
+  height: 7px;
   margin: 40px auto 28px;
-  background: var(--endfield-orange);
+  background-image: var(--sil-hazard);
+  box-shadow: 0 0 16px rgba(255, 95, 0, 0.25);
 }
 
 .SilandriHome-values-actions {
@@ -1462,11 +1469,12 @@ body {
   }
 
   .SilandriHome-title {
+    font-size: clamp(44px, 13vw, 84px);
     letter-spacing: -0.05em;
   }
 
   .SilandriHome-hero {
-    padding-top: max(18px, env(safe-area-inset-top, 0px) + 12px);
+    padding-top: calc(var(--vp-nav-height, 64px) + max(14px, env(safe-area-inset-top, 0px)));
     padding-bottom: 52px;
   }
 
@@ -1487,6 +1495,41 @@ body {
     text-align: left;
   }
 
+  .SilandriHome-values,
+  .SilandriHome-protocols {
+    padding-top: 76px;
+    padding-bottom: 76px;
+  }
+
+  .SilandriHome-cta {
+    padding-top: 88px;
+    padding-bottom: 88px;
+  }
+
+  .SilandriHome-values-line {
+    font-size: clamp(40px, 12.5vw, 92px);
+  }
+
+  .SilandriHome-kicker {
+    margin-bottom: 26px;
+    letter-spacing: 0.24em;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .SilandriHome-section-title {
+    font-size: clamp(44px, 12vw, 72px);
+  }
+
+  .SilandriHome-cta-title {
+    font-size: clamp(40px, 12vw, 88px);
+  }
+
+  .SilandriHome-cta-text {
+    font-size: 15px;
+    line-height: 1.75;
+    margin: 18px auto 28px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1504,7 +1547,7 @@ body {
 
 @supports (min-height: 100dvh) {
   .SilandriHome-hero {
-    min-height: calc(100dvh - var(--vp-nav-height));
+    min-height: 100dvh;
   }
 
   @media (min-width: 960px) {
@@ -1516,7 +1559,7 @@ body {
 
 @supports not (min-height: 100dvh) {
   .SilandriHome-hero {
-    min-height: calc(var(--sil-vh, 1vh) * 100 - var(--vp-nav-height));
+    min-height: calc(var(--sil-vh, 1vh) * 100);
   }
 
   @media (min-width: 960px) {
@@ -1764,3 +1807,1211 @@ body {
   pointer-events: none !important;
   cursor: default !important;
 }
+
+/* =====================================================
+   Constructivism × P5 × Endfield — Homepage redesign
+   ===================================================== */
+
+/* --- Common motion + utility ---------------------------------------- */
+@keyframes sil-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes sil-rotate-slow {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes sil-pulse {
+  0%, 100% { opacity: 0.08; }
+  50% { opacity: 0.18; }
+}
+
+@keyframes sil-float-y {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50% { transform: translateY(-6px) rotate(var(--rot, 0deg)); }
+}
+
+/* --- Section number background numerals ----------------------------- */
+.SilandriHome-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.SilandriHome-bg > * {
+  position: absolute;
+}
+
+.SilandriHome-bg-number {
+  font-family: var(--vp-font-family-mono);
+  font-weight: 800;
+  font-size: clamp(180px, 36vw, 520px);
+  line-height: 0.85;
+  color: var(--vp-c-text-1);
+  opacity: 0.05;
+  letter-spacing: -0.08em;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.dark .SilandriHome-bg-number {
+  opacity: 0.06;
+}
+
+/* --- Right-side anchor index --------------------------------------- */
+.SilandriHome-anchors {
+  position: fixed;
+  right: 24px;
+  top: calc(var(--vp-nav-height, 64px) + 22px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 5;
+  opacity: 0;
+  animation: sil-fade-in 0.6s 1s ease-out forwards;
+}
+
+.SilandriHome-anchor {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  background: none;
+  border: none;
+  padding: 4px 0;
+  cursor: pointer;
+  font-family: var(--vp-font-family-mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: var(--sil-overlay-c);
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.SilandriHome-anchor-code {
+  opacity: 0.45;
+  transition: opacity 0.3s, color 0.3s;
+  min-width: 1.6em;
+  text-align: right;
+}
+
+.SilandriHome-anchor-label {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  color: var(--sil-overlay-strong);
+  transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  order: -1;
+  text-align: right;
+}
+
+.SilandriHome-anchor-dot {
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--sil-overlay-c);
+  background: transparent;
+  flex: 0 0 auto;
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.SilandriHome-anchor:hover .SilandriHome-anchor-code,
+.SilandriHome-anchor.is-active .SilandriHome-anchor-code {
+  opacity: 1;
+  color: var(--endfield-orange);
+}
+
+.SilandriHome-anchor:hover .SilandriHome-anchor-dot,
+.SilandriHome-anchor.is-active .SilandriHome-anchor-dot {
+  background: var(--endfield-orange);
+  border-color: var(--endfield-orange);
+  box-shadow: 0 0 14px rgba(255, 95, 0, 0.5);
+}
+
+.SilandriHome-anchor:hover .SilandriHome-anchor-label {
+  max-width: 140px;
+  opacity: 1;
+}
+
+/* --- Hero section enhancements ------------------------------------- */
+.SilandriHome-hero {
+  position: relative;
+}
+
+.SilandriHome-hero .SilandriHome-bg-number {
+  top: 50%;
+  right: -6vw;
+  transform: translateY(-50%) rotate(-4deg);
+}
+
+.SilandriHome-bg-triangle {
+  top: -8%;
+  left: -6%;
+  width: 56%;
+  height: 78%;
+  background: var(--endfield-orange);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  opacity: 0.09;
+  transform: rotate(-2deg);
+  --rot: -2deg;
+  animation: sil-float-y 14s ease-in-out infinite;
+}
+
+.dark .SilandriHome-bg-triangle {
+  opacity: 0.12;
+}
+
+.SilandriHome-bg-block {
+  bottom: -12%;
+  right: -8%;
+  width: 38%;
+  height: 32%;
+  background: var(--vp-c-text-1);
+  opacity: 0.04;
+  transform: rotate(-6deg);
+  --rot: -6deg;
+  animation: sil-float-y 18s ease-in-out infinite;
+}
+
+.SilandriHome-bg-halftone {
+  inset: 0;
+  background-image: radial-gradient(circle, var(--vp-c-text-1) 1px, transparent 1.5px);
+  background-size: 22px 22px;
+  opacity: 0.045;
+  -webkit-mask-image: radial-gradient(ellipse at 80% 25%, #000 25%, transparent 65%);
+  mask-image: radial-gradient(ellipse at 80% 25%, #000 25%, transparent 65%);
+}
+
+.SilandriHome-letter-mark {
+  position: absolute;
+  top: 50%;
+  left: 4%;
+  transform: translateY(-50%) rotate(-9deg);
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 900;
+  font-size: clamp(280px, 50vh, 580px);
+  line-height: 0.8;
+  color: var(--vp-c-text-1);
+  opacity: 0.04;
+  letter-spacing: -0.08em;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
+
+.dark .SilandriHome-letter-mark {
+  opacity: 0.06;
+}
+
+.SilandriHome-hero-code {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--endfield-orange);
+  opacity: 0;
+  animation: sil-fade-in 0.6s 0.3s ease-out forwards;
+}
+
+.SilandriHome-hero-code-dash {
+  color: var(--vp-c-text-2);
+}
+
+.SilandriHome-title {
+  position: relative;
+  isolation: isolate;
+}
+
+.SilandriHome-title::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--endfield-orange);
+  opacity: 0.42;
+  transform: translate(12px, 14px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.SilandriHome-tagline {
+  margin: 14px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-2);
+  opacity: 0;
+  animation: sil-fade-in 0.6s 0.7s ease-out forwards;
+}
+
+.SilandriHome-tagline-slash {
+  color: var(--endfield-orange);
+}
+
+.SilandriHome-vertical-mark {
+  position: absolute;
+  bottom: 88px;
+  right: 38px;
+  z-index: 1;
+  font-family: var(--vp-font-family-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-2);
+  writing-mode: vertical-rl;
+  opacity: 0;
+  animation: sil-fade-in 0.6s 0.9s ease-out forwards;
+  pointer-events: none;
+}
+
+.SilandriHome-emblem-halftone {
+  position: absolute;
+  inset: -18%;
+  background-image: radial-gradient(circle, var(--endfield-orange) 1px, transparent 1.5px);
+  background-size: 11px 11px;
+  opacity: 0.1;
+  -webkit-mask-image: radial-gradient(circle, #000 28%, transparent 64%);
+  mask-image: radial-gradient(circle, #000 28%, transparent 64%);
+  pointer-events: none;
+  animation: sil-pulse 5s ease-in-out infinite;
+}
+
+@keyframes sil-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Targeting frame around the hero emblem — rotating reticle + corner brackets */
+.SilandriHome-emblem-reticle {
+  position: absolute;
+  inset: 1%;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 95, 0, 0.5);
+  pointer-events: none;
+  transform-origin: 50% 50%;
+  animation: sil-spin 46s linear infinite;
+}
+
+.SilandriHome-emblem-reticle::before {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 95, 0, 0.16);
+}
+
+.SilandriHome-emblem-bracket {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border: 0 solid var(--endfield-orange);
+  pointer-events: none;
+  filter: drop-shadow(0 0 5px rgba(255, 95, 0, 0.4));
+}
+
+.SilandriHome-emblem-bracket--tl { top: -3%; left: -3%; border-top-width: 2px; border-left-width: 2px; }
+.SilandriHome-emblem-bracket--tr { top: -3%; right: -3%; border-top-width: 2px; border-right-width: 2px; }
+.SilandriHome-emblem-bracket--bl { bottom: -3%; left: -3%; border-bottom-width: 2px; border-left-width: 2px; }
+.SilandriHome-emblem-bracket--br { bottom: -3%; right: -3%; border-bottom-width: 2px; border-right-width: 2px; }
+
+/* --- Values section enhancements ----------------------------------- */
+.SilandriHome-values {
+  position: relative;
+  overflow: hidden;
+}
+
+.SilandriHome-bg-number--values-left {
+  top: 14%;
+  left: -6%;
+  transform: rotate(-3deg);
+  font-size: clamp(220px, 38vw, 540px);
+}
+
+.SilandriHome-bg-number--values-right {
+  bottom: 6%;
+  right: -8%;
+  transform: rotate(3deg);
+  font-size: clamp(220px, 38vw, 540px);
+  color: var(--endfield-orange);
+  opacity: 0.05;
+}
+
+.SilandriHome-bg-circle {
+  top: 50%;
+  left: 50%;
+  width: min(78vw, 720px);
+  height: min(78vw, 720px);
+  border: 1px dashed rgba(255, 95, 0, 0.14);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: sil-rotate-slow 80s linear infinite;
+}
+
+.SilandriHome-bg-circle::before {
+  content: '';
+  position: absolute;
+  inset: 18%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+}
+
+.SilandriHome-bg-stripes {
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0px,
+    transparent 18px,
+    rgba(255, 95, 0, 0.03) 18px,
+    rgba(255, 95, 0, 0.03) 19px
+  );
+}
+
+.SilandriHome-values-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.SilandriHome-kicker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.SilandriHome-kicker-bracket {
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.08em;
+}
+
+.SilandriHome-values-cards {
+  list-style: none;
+  padding: 0;
+  margin: 64px auto 48px;
+  max-width: 1080px;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .SilandriHome-values-cards {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
+    gap: 18px;
+  }
+
+  .SilandriHome-values-card:nth-child(1) {
+    transform: translateY(-22px) rotate(-2deg);
+  }
+
+  .SilandriHome-values-card:nth-child(2) {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  .SilandriHome-values-card:nth-child(3) {
+    transform: translateY(22px) rotate(2deg);
+  }
+}
+
+.SilandriHome-values-card {
+  position: relative;
+  padding: 26px 22px 28px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.3s,
+    border-color 0.3s;
+}
+
+.SilandriHome-values-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 95, 0, 0.16) 1px, transparent 1.5px);
+  background-size: 9px 9px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.SilandriHome-values-card:hover {
+  background: rgba(255, 95, 0, 0.04);
+  border-color: var(--endfield-orange);
+}
+
+.SilandriHome-values-card:hover::before {
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .SilandriHome-values-card:hover {
+    transform: translateY(-30px) rotate(0deg);
+  }
+}
+
+.SilandriHome-values-card-index {
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  color: var(--endfield-orange);
+}
+
+.SilandriHome-values-card-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 900;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1;
+  color: #fff;
+  letter-spacing: -0.04em;
+}
+
+.SilandriHome-values-card-desc {
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.62);
+  font-family: var(--vp-font-family-base);
+  font-weight: 500;
+}
+
+.SilandriHome-values-card-diag {
+  position: absolute;
+  bottom: 12px;
+  right: 10px;
+  width: 38%;
+  height: 1px;
+  background: var(--endfield-orange);
+  transform-origin: right bottom;
+  transform: rotate(-26deg);
+  opacity: 0.6;
+}
+
+.SilandriHome-values-card-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 0 solid var(--endfield-orange);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.SilandriHome-values-card-corner--tl {
+  top: 4px;
+  left: 4px;
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+
+.SilandriHome-values-card-corner--br {
+  bottom: 4px;
+  right: 4px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+}
+
+.SilandriHome-values-card:hover .SilandriHome-values-card-corner {
+  opacity: 1;
+}
+
+/* --- Protocols section enhancements -------------------------------- */
+.SilandriHome-protocols {
+  position: relative;
+  overflow: hidden;
+}
+
+.SilandriHome-bg-number--protocols {
+  top: 6%;
+  right: -2%;
+  transform: rotate(-3deg);
+  font-size: clamp(220px, 32vw, 460px);
+}
+
+.SilandriHome-bg-ring {
+  top: 10%;
+  right: -8%;
+  width: 36vw;
+  height: 36vw;
+  max-width: 480px;
+  max-height: 480px;
+  border: 1px solid var(--endfield-orange);
+  border-radius: 50%;
+  opacity: 0.16;
+  transform: rotate(15deg);
+}
+
+.SilandriHome-bg-ring::before,
+.SilandriHome-bg-ring::after {
+  content: '';
+  position: absolute;
+  border: 1px dashed var(--endfield-orange);
+  border-radius: 50%;
+}
+
+.SilandriHome-bg-ring::before {
+  inset: 12%;
+  opacity: 0.65;
+}
+
+.SilandriHome-bg-ring::after {
+  inset: 30%;
+  border-style: solid;
+  opacity: 0.35;
+}
+
+.SilandriHome-bg-bar {
+  bottom: 22%;
+  left: -10%;
+  width: 60%;
+  height: 4px;
+  background: var(--vp-c-text-1);
+  opacity: 0.06;
+  transform: rotate(-2deg);
+}
+
+.SilandriHome-protocols-head {
+  position: relative;
+  z-index: 1;
+}
+
+.SilandriHome-protocols-head-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.SilandriHome-protocols-code {
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--endfield-orange);
+  margin-bottom: 14px;
+}
+
+.SilandriHome-section-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+/* Feature card counters + halftone hover */
+.SilandriHome-features.VPFeatures {
+  counter-reset: sil-feature;
+  position: relative;
+  z-index: 1;
+}
+
+.SilandriHome-protocols .VPFeature {
+  counter-increment: sil-feature;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.SilandriHome-protocols .VPFeature::before {
+  content: '#' counter(sil-feature, decimal-leading-zero);
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: var(--endfield-orange);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.SilandriHome-protocols .VPFeature .box {
+  padding-top: 48px;
+}
+
+.SilandriHome-protocols .VPFeature:hover {
+  background-image: radial-gradient(circle, rgba(255, 95, 0, 0.18) 1px, transparent 1.5px);
+  background-size: 9px 9px;
+  background-position: 4px 4px;
+}
+
+/* --- CTA section enhancements ------------------------------------- */
+.SilandriHome-cta {
+  position: relative;
+  overflow: hidden;
+}
+
+.SilandriHome-bg-number--cta {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-2deg);
+  color: var(--endfield-orange);
+  opacity: 0.04;
+  font-size: clamp(280px, 58vw, 760px);
+}
+
+.SilandriHome-cta-tick {
+  position: absolute;
+  background: var(--endfield-orange);
+  opacity: 0.55;
+}
+
+.SilandriHome-cta-tick--n {
+  top: 16%;
+  left: 50%;
+  width: 1px;
+  height: 28px;
+  transform: translateX(-50%);
+}
+
+.SilandriHome-cta-tick--s {
+  bottom: 16%;
+  left: 50%;
+  width: 1px;
+  height: 28px;
+  transform: translateX(-50%);
+}
+
+.SilandriHome-cta-tick--e {
+  top: 50%;
+  right: 14%;
+  width: 28px;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+.SilandriHome-cta-tick--w {
+  top: 50%;
+  left: 14%;
+  width: 28px;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+.SilandriHome-cta-stripes {
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0px,
+    transparent 26px,
+    rgba(255, 95, 0, 0.04) 26px,
+    rgba(255, 95, 0, 0.04) 27px
+  );
+}
+
+.SilandriHome-cta-vertical {
+  position: absolute;
+  top: 50%;
+  left: 36px;
+  transform: translateY(-50%) rotate(180deg);
+  z-index: 1;
+  font-family: var(--vp-font-family-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+  writing-mode: vertical-rl;
+  pointer-events: none;
+}
+
+.SilandriHome-cta-lead,
+.SilandriHome-cta-tail {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+}
+
+.SilandriHome-cta-lead::before,
+.SilandriHome-cta-tail::before {
+  content: attr(data-shadow);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--endfield-orange);
+  opacity: 0.28;
+  transform: translate(12px, 14px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.SilandriHome-cta-actions {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.SilandriHome-cta-burst {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.SilandriHome-cta-burst-ray {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(180deg, var(--endfield-orange), transparent);
+  transform-origin: 50% 100%;
+  transform: translate(-50%, -100%) rotate(var(--r, 0deg));
+  opacity: 0;
+  transition: opacity 0.35s ease, height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.SilandriHome-cta-actions:hover .SilandriHome-cta-burst-ray {
+  opacity: 0.85;
+  height: 84px;
+}
+
+/* --- Light mode tweaks for dark-card sections ---------------------- */
+.SilandriHome-values .SilandriHome-bg-stripes,
+.SilandriHome-cta .SilandriHome-cta-stripes {
+  opacity: 0.6;
+}
+
+/* --- Responsive ---------------------------------------------------- */
+@media (max-width: 1180px) {
+  .SilandriHome-vertical-mark {
+    right: 16px;
+    bottom: 70px;
+  }
+
+  .SilandriHome-cta-vertical {
+    left: 16px;
+  }
+}
+
+@media (max-width: 959px) {
+  .SilandriHome-anchors {
+    display: none;
+  }
+
+  .SilandriHome-vertical-mark,
+  .SilandriHome-cta-vertical {
+    display: none;
+  }
+
+  .SilandriHome-letter-mark {
+    font-size: 42vh;
+    opacity: 0.035;
+    left: -2%;
+  }
+
+  .SilandriHome-cta-tick--e,
+  .SilandriHome-cta-tick--w {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .SilandriHome-emblem-bracket {
+    width: 16px;
+    height: 16px;
+  }
+
+  .SilandriHome-hero-code {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .SilandriHome-bg-number {
+    font-size: 36vw;
+  }
+
+  .SilandriHome-title::before {
+    transform: translate(6px, 7px);
+  }
+
+  .SilandriHome-tagline {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
+
+  .SilandriHome-values-cards {
+    margin: 40px auto 32px;
+    gap: 12px;
+  }
+
+  .SilandriHome-values-card {
+    padding: 22px 18px 24px;
+  }
+
+  .SilandriHome-values-card-title {
+    font-size: 36px;
+  }
+
+  .SilandriHome-cta-tick--n,
+  .SilandriHome-cta-tick--s {
+    height: 18px;
+  }
+
+  .SilandriHome-cta-lead::before,
+  .SilandriHome-cta-tail::before {
+    transform: translate(6px, 7px);
+  }
+}
+
+/* --- Reduced motion ------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .SilandriHome-bg-circle,
+  .SilandriHome-bg-triangle,
+  .SilandriHome-bg-block,
+  .SilandriHome-emblem-halftone,
+  .SilandriHome-emblem-reticle {
+    animation: none !important;
+  }
+
+  .SilandriHome-anchors,
+  .SilandriHome-hero-code,
+  .SilandriHome-tagline,
+  .SilandriHome-vertical-mark {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .SilandriHome-vertical-mark {
+    writing-mode: vertical-rl;
+  }
+
+  .SilandriHome-cta-vertical {
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  .SilandriHome-values-card {
+    transform: none !important;
+  }
+
+  .SilandriHome-cta-burst-ray {
+    display: none;
+  }
+}
+
+/* ===================================================================
+   BOLD REDESIGN — Persona 5 × Russian Constructivism × Endfield
+   Appended last so same-class rules win by source order. Orange / black /
+   white, broken-grid composition, kinetic slam-in entrances. Everything
+   degrades to a static poster under reduced-motion and when JS never mounts.
+   =================================================================== */
+
+/* --- Staggered slam-in scaffolding ---------------------------------- */
+/* A .sil-enter child is hidden only once JS is mounted (.is-ready) AND its
+   section has not entered yet; on .is-in-view it slams to rest. The keyframe's
+   omitted 100% resolves to each element's own transform, so this composes with
+   per-card resting rotations; `backwards` fill leaves hover transforms intact.
+   No JS ⇒ never hidden ⇒ always shown. */
+/* Gated on no-preference: reduced-motion users skip the hidden state entirely,
+   so every element rests at its own base opacity with no animation. */
+@media (prefers-reduced-motion: no-preference) {
+  .SilandriHome.is-ready [data-section]:not(.is-in-view) .sil-enter {
+    opacity: 0;
+  }
+
+  .SilandriHome.is-ready [data-section].is-in-view .sil-enter {
+    animation: sil-slam 0.74s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    animation-delay: calc(var(--i, 0) * 80ms);
+  }
+}
+
+.sil-enter--left { --ex: -64px; --ey: 0px; --er: -2deg; }
+.sil-enter--right { --ex: 64px; --ey: 0px; --er: 2deg; }
+.sil-enter--scale { --ey: 0px; --er: -3deg; --es: 0.8; }
+
+@keyframes sil-slam {
+  from {
+    opacity: 0;
+    transform: translate(var(--ex, 0px), var(--ey, 48px)) rotate(var(--er, -1.2deg)) scale(var(--es, 1));
+  }
+}
+
+@keyframes sil-ticker {
+  to { transform: translateX(-50%); }
+}
+
+/* --- HERO: text-left / orange-sun-right / outline numeral / slogan --- */
+@media (min-width: 960px) {
+  /* Broken grid: copy block to the left, emblem over the sun to the right. */
+  .SilandriHome-hero-body {
+    flex-direction: row-reverse;
+    gap: clamp(32px, 6vw, 96px);
+  }
+}
+
+.SilandriHome-bg-disc {
+  top: 50%;
+  right: -20vw;
+  width: min(66vw, 700px);
+  height: min(66vw, 700px);
+  border-radius: 50%;
+  translate: 0 -50%;
+  background: radial-gradient(circle at 38% 34%, #ff8a45, var(--endfield-orange) 56%, #cb4b00 100%);
+  opacity: 0.9;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 54%, transparent 76%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 54%, transparent 76%);
+}
+
+.dark .SilandriHome-bg-disc {
+  opacity: 0.78;
+}
+
+.SilandriHome-hero .SilandriHome-bg-triangle {
+  opacity: 0.16;
+}
+
+.dark .SilandriHome-hero .SilandriHome-bg-triangle {
+  opacity: 0.2;
+}
+
+/* Giant outline "00" centred behind everything — thin strokes keep text legible. */
+.SilandriHome-hero .SilandriHome-bg-number {
+  top: 50%;
+  left: 50%;
+  right: auto;
+  translate: -50% -50%;
+  rotate: -5deg;
+  transform: none;
+  font-size: clamp(300px, 54vw, 900px);
+  color: transparent;
+  -webkit-text-stroke: 2px var(--endfield-orange);
+  opacity: 0.16;
+}
+
+.dark .SilandriHome-hero .SilandriHome-bg-number {
+  opacity: 0.2;
+}
+
+/* Diagonal scrolling slogan band, low in the hero, behind the wordmark. */
+.SilandriHome-ticker {
+  position: absolute;
+  left: -12%;
+  right: -12%;
+  bottom: 13%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  rotate: -4deg;
+  opacity: 0.22;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+}
+
+.SilandriHome-ticker-track {
+  display: flex;
+  width: max-content;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .SilandriHome-ticker-track {
+    animation: sil-ticker 30s linear infinite;
+  }
+}
+
+.SilandriHome-ticker-seq {
+  font-family: var(--vp-font-family-mono);
+  font-weight: 800;
+  font-size: clamp(30px, 4.6vw, 66px);
+  letter-spacing: 0.05em;
+  color: var(--endfield-orange);
+  white-space: nowrap;
+  padding-right: 0.25em;
+}
+
+@media (max-width: 767px) {
+  /* Keep the sun a top-right corner accent so it never sits behind body text. */
+  .SilandriHome-bg-disc {
+    top: -10vw;
+    right: -30vw;
+    translate: 0 0;
+    width: 80vw;
+    height: 80vw;
+    opacity: 0.55;
+  }
+
+  .SilandriHome-hero .SilandriHome-bg-number {
+    font-size: 104vw;
+  }
+
+  .SilandriHome-ticker {
+    bottom: 9%;
+    opacity: 0.18;
+  }
+}
+
+/* --- VALUES / PROTOCOLS / CTA: bolder shapes + slam-in ------------- */
+.SilandriHome-values .SilandriHome-bg-number--values-left { opacity: 0.1; }
+.SilandriHome-values .SilandriHome-bg-number--values-right { opacity: 0.13; }
+.SilandriHome-values .SilandriHome-bg-circle { border-color: rgba(255, 95, 0, 0.22); }
+.SilandriHome-protocols .SilandriHome-bg-ring { opacity: 0.24; }
+.SilandriHome-cta .SilandriHome-bg-number--cta { opacity: 0.06; }
+.SilandriHome-cta-target { opacity: 0.6; }
+
+@media (min-width: 768px) {
+  .SilandriHome-values-line { font-size: clamp(72px, 12.5vw, 172px); }
+  .SilandriHome-section-title { font-size: clamp(58px, 8vw, 104px); }
+}
+
+/* Feature cards slam in — VPFeatures renders them, so target them directly and
+   stagger through the wrapping .item:nth-child. */
+@media (prefers-reduced-motion: no-preference) {
+  .SilandriHome.is-ready .SilandriHome-protocols:not(.is-in-view) .VPFeature {
+    opacity: 0;
+  }
+
+  .SilandriHome.is-ready .SilandriHome-protocols.is-in-view .VPFeature {
+    animation: sil-slam 0.74s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+}
+
+.SilandriHome-protocols.is-in-view .item:nth-child(2) .VPFeature { animation-delay: 90ms; }
+.SilandriHome-protocols.is-in-view .item:nth-child(3) .VPFeature { animation-delay: 180ms; }
+.SilandriHome-protocols.is-in-view .item:nth-child(4) .VPFeature { animation-delay: 270ms; }
+.SilandriHome-protocols.is-in-view .item:nth-child(5) .VPFeature { animation-delay: 360ms; }
+.SilandriHome-protocols.is-in-view .item:nth-child(6) .VPFeature { animation-delay: 450ms; }
+
+/* --- Anchor index: connect the dots, bolder active state ----------- */
+.SilandriHome-anchors::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  right: 3px;
+  width: 1px;
+  background: var(--sil-overlay-c);
+  opacity: 0.22;
+}
+
+.SilandriHome-anchor-dot {
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.SilandriHome-anchor:hover .SilandriHome-anchor-dot,
+.SilandriHome-anchor.is-active .SilandriHome-anchor-dot {
+  transform: scale(1.3);
+}
+
+/* --- Immersive nav over the hero (home page, at the top, all widths) --- */
+.VPNavBar.home.top {
+  background-color: transparent !important;
+}
+
+.VPNavBar.home.top .divider {
+  display: none;
+}
+
+@media (max-width: 959px) {
+  /* VitePress leaves the mobile nav in-flow (position: relative), so a
+     transparent bar reserves vertical space instead of overlaying the hero.
+     Use `absolute` (not `fixed`) on the home page: the bar overlays the hero
+     for an immersive top, yet scrolls away with the page instead of staying
+     pinned over the content. */
+  .Layout.silandri-home .VPNav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+
+/* ===== PAGE 3 (教义 / DOCTRINE) — bolder doctrine statement ========= */
+.SilandriHome-protocols .SilandriHome-section-title {
+  text-shadow: 7px 8px 0 rgba(255, 95, 0, 0.22);
+}
+
+.SilandriHome-protocols .SilandriHome-bg-ring {
+  opacity: 0.5;
+  border-width: 2px;
+}
+
+.SilandriHome-protocols .SilandriHome-bg-number--protocols {
+  opacity: 0.13;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--vp-c-text-1);
+}
+
+/* Faint guide bar → bold orange constructivist edge rule on the left. */
+.SilandriHome-protocols .SilandriHome-bg-bar {
+  top: 18%;
+  bottom: 18%;
+  left: 0;
+  width: 8px;
+  height: auto;
+  background: var(--endfield-orange);
+  opacity: 0.8;
+  transform: none;
+}
+
+.SilandriHome-protocols .VPFeature {
+  border-top: 3px solid var(--endfield-orange);
+}
+
+/* ===== PAGE 4 (部署 / DEPLOY) — deploy climax ====================== */
+/* Orange core glow behind the call-to-action. */
+.SilandriHome-cta-inner::before {
+  content: "";
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  width: min(122vw, 1120px);
+  height: min(122vw, 1120px);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255, 95, 0, 0.2), rgba(255, 95, 0, 0.05) 38%, transparent 62%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.SilandriHome-cta-target {
+  opacity: 0.85;
+}
+
+.SilandriHome-cta-target::before {
+  border-color: rgba(255, 95, 0, 0.5);
+}
+
+/* The join button is the conversion goal — make it the unmistakable focal point. */
+.SilandriHome-cta-button.VPButton.VPButton {
+  height: 64px;
+  padding: 0 56px;
+  font-size: 15px;
+  box-shadow: 0 0 0 1px rgba(255, 95, 0, 0.55), 0 18px 50px rgba(255, 95, 0, 0.35);
+}
+
+.SilandriHome-cta-button.VPButton:hover {
+  box-shadow: 0 0 0 1px var(--endfield-orange), 0 22px 62px rgba(255, 95, 0, 0.5);
+}
+
+@media (min-width: 768px) {
+  .SilandriHome-cta-title {
+    font-size: clamp(64px, 9vw, 128px);
+  }
+}
+
+/* === SIL REDESIGN APPEND POINT === */

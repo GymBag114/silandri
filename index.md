@@ -27,4 +27,22 @@ silFeatures:
     details: 地位对等、零排挤政策、试错容忍
   - title: 秩序
     details: 严格执行标准化作业程序
+
+silSections:
+  hero:
+    code: "00"
+    name: CONVERGENCE
+    label: 收束
+  values:
+    code: "01"
+    name: MANIFESTO
+    label: 宣言
+  protocols:
+    code: "02"
+    name: DOCTRINE
+    label: 教义
+  cta:
+    code: "03"
+    name: DEPLOY
+    label: 部署
 ---

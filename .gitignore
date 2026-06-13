@@ -12,6 +12,8 @@ dist
 cache
 dist-ssr
 *.local
+.claude
+claude.md
 
 # Editor directories and files
 .vscode/*
